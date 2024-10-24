@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario 64 Emulator</title>
+    <script src="path/to/n64wasm.js"></script>
+</head>
+<body>
+    <h1>Mario 64 Emulator</h1>
+    <div id="emulator-container"></div>
+
+    <button id="btnPlay" class="btn btn-primary mt-4" onclick="loadRom('insert.z64')">Play</button>
+
+    <script>
+        const canvas = document.createElement('canvas');
+        document.getElementById('emulator-container').appendChild(canvas);
+        
+        const n64 = new N64WASM(canvas);
+
+        function loadRom(romPath) {
+            n64.loadRom(romPath)
+                .then(() => {
+                    n64.start();
+                })
+                .catch(err => {
+                    console.error('Failed to load ROM:', err);
+                });
+        }
+    </script>
+</body>
+</html>
